@@ -73,7 +73,7 @@ const Navbar = () => {
                     <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/Heart.svg" alt="img" /></Badge>
                 </div>
                 <div className="icon">
-                    <img className="" src="/images/components/Profile.svg" alt="img" />
+                    <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />
                     <StyledMenu
                         id="basic-menu"
                         anchorEl={anchorEl}
@@ -107,9 +107,10 @@ const Con = styled.div`
     width:100%;    
     display: flex;
     justify-content: space-between;
-    align-items:center;
-    border-bottom: 1px solid #333; 
+    align-items:center; 
     padding: 20px 120px; 
+    position: fixed;
+    background-color:white;
     @media (max-width: 1200px) { 
         padding: 20px 20px; 
     }
