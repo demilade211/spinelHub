@@ -23,26 +23,54 @@ const Navbar = () => {
 
     const isActive = route => router.pathname === route;
     return (
-        <Con>
-            <div className='left' onClick={() => Router.push(`/`)}>
-                <img className="mob-ham mr-2" src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
-                <img src="/images/components/logo.svg" alt="img" />
-            </div>
-            <div className="right flex items-center">
-                <SearchCon>
-                    <input type="text" placeholder="Search for a product" />
-                    <img src="/images/components/Search.svg" alt="img" />
-                </SearchCon>
-                <CurrencyCon>
-                    <img className="" src="/images/components/Bill.svg" alt="img" />
-                    <p className="mx-2">Naira</p>
-                    <div className="img"><img src="/images/components/drop.svg" alt="img" /></div>
-                </CurrencyCon>
-                <div className="per-cart-love flex items-center">
-                    <div className="icon">
+        <>
+            <Con>
+                <div className='left' onClick={() => Router.push(`/`)}>
+                    <img className="mob-ham mr-2" src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
+                    <img src="/images/components/logo.svg" alt="img" />
+                </div>
+                <div className="right flex items-center">
+                    <SearchCon>
+                        <input type="text" placeholder="Search for a product" />
+                        <img src="/images/components/Search.svg" alt="img" />
+                    </SearchCon>
+                    <CurrencyCon>
+                        <img className="" src="/images/components/Bill.svg" alt="img" />
+                        <p className="mx-2">Naira</p>
+                        <div className="img"><img src="/images/components/drop.svg" alt="img" /></div>
+                    </CurrencyCon>
+                    <div className="per-cart-love flex items-center">
+                        <div className="icon">
+                            <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/cart.svg" alt="img" /></Badge>
+                        </div>
+                        <div className="icon mx-3">
+                            <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/Heart.svg" alt="img" /></Badge>
+                        </div>
+                        <div className="icon">
+                            <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />
+                            <StyledMenu
+                                id="basic-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button',
+                                }}
+                            >
+                                <MenuItem onClick={handleClose}>Login</MenuItem>
+                                <MenuItem onClick={handleClose}>Sign Up</MenuItem>
+                            </StyledMenu>
+                        </div>
+                    </div>
+                </div>
+                <div className='mobile-right'>
+                    <div className="icon mr-3">
+                        <img src="/images/components/Search.svg" alt="img" />
+                    </div>
+                    <div className="icon mr-3">
                         <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/cart.svg" alt="img" /></Badge>
                     </div>
-                    <div className="icon mx-3">
+                    <div className="icon mr-3">
                         <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/Heart.svg" alt="img" /></Badge>
                     </div>
                     <div className="icon">
@@ -61,56 +89,32 @@ const Navbar = () => {
                         </StyledMenu>
                     </div>
                 </div>
-            </div>
-            <div className='mobile-right'>
-                <div className="icon mr-3">
-                    <img src="/images/components/Search.svg" alt="img" />
+                <div className={`mobile-nav ${showNav && "active"}`}>
+                    <div className="close" onClick={() => setShowNav(false)} >
+                        <img src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
+                    </div>
+                    <ul>
+                        <li onClick={() => Router.push(`/`)}>Home</li>
+                        <li onClick={() => Router.push(`/about`)}>About</li>
+                        <li onClick={() => Router.push(`/services`)}>Services</li>
+                        <li onClick={() => Router.push(`/contact`)}>Contact</li>
+                    </ul>
                 </div>
-                <div className="icon mr-3">
-                    <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/cart.svg" alt="img" /></Badge>
-                </div>
-                <div className="icon mr-3">
-                    <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/Heart.svg" alt="img" /></Badge>
-                </div>
-                <div className="icon">
-                    <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />
-                    <StyledMenu
-                        id="basic-menu"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        MenuListProps={{
-                            'aria-labelledby': 'basic-button',
-                        }}
-                    >
-                        <MenuItem onClick={handleClose}>Login</MenuItem>
-                        <MenuItem onClick={handleClose}>Sign Up</MenuItem>
-                    </StyledMenu>
-                </div>
-            </div>
-            <div className={`mobile-nav ${showNav && "active"}`}>
-                <div className="close" onClick={() => setShowNav(false)} >
-                    <img src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
-                </div>
-                <ul>
-                    <li onClick={() => Router.push(`/`)}>Home</li>
-                    <li onClick={() => Router.push(`/about`)}>About</li>
-                    <li onClick={() => Router.push(`/services`)}>Services</li>
-                    <li onClick={() => Router.push(`/contact`)}>Contact</li>
-                </ul>
-            </div>
-        </Con>
+            </Con>
+        </>
     )
 }
 
 const Con = styled.div`
-    width:100%;    
+    width:100%;     
+    min-height: 90px;
     display: flex;
     justify-content: space-between;
     align-items:center; 
     padding: 20px 120px; 
     position: fixed;
     background-color:white;
+    z-index: 2;
     @media (max-width: 1200px) { 
         padding: 20px 20px; 
     }
@@ -157,6 +161,7 @@ const Con = styled.div`
         }
     }
     .mobile-nav{ 
+        border: 1px solid black;
         position: absolute;
         width: 100%;
         top: -100%; /* Start above the viewport */
@@ -168,7 +173,7 @@ const Con = styled.div`
         opacity: 0; /* Start fully transparent */
         transition: 900ms ease-in;
         transform: translateY(0); /* Start at the original position */ 
-        z-index:5;
+        z-index:500;
         &.active {
             /* Add a class 'active' when you want to show the navigation */
             top: 0; /* Move it to the original position */

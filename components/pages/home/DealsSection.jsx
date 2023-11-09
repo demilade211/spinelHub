@@ -51,7 +51,7 @@ const Con = styled.section`
       font-weight: 600;
       line-height: 140%; /* 33.6px */
       @media (max-width: 405px) { 
-        font-size: 19px;
+        font-size: 18px;
       }
     }
   }

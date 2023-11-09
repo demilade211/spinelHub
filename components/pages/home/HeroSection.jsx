@@ -23,7 +23,7 @@ const Con = styled.section`
   height:55vh;
   display: flex;
   background: linear-gradient(90deg, #ECE9E6 0%, #FFF 100%);
-  margin-top: 96px;
+  margin-top: 90px; 
   @media (max-width: 1200px) { 
     flex-direction: column;
     height: auto;
@@ -69,8 +69,7 @@ const Right = styled.div`
   @media (max-width: 1200px) { 
     width:100%;
     height: 382px;
-    padding: 50px; 
-    border: 1px solid black;
+    padding: 50px;  
   }
   @media (max-width: 380px) {  
     background: url('/images/pages/home/mbg.svg');  
