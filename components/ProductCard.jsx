@@ -4,18 +4,18 @@ import styled from 'styled-components';
 const ProductCard = () => {
   return (
     <Con>
-        <div className="img-con">
-            <img className="" src="/images/pages/home/pic.png" alt="img" />
+      <div className="img-con">
+        <img className="" src="/images/pages/home/pic.png" alt="img" />
+      </div>
+      <h1>Product Name</h1>
+      <p>If there is a product description, type it here</p>
+      <h2>₦234,000</h2>
+      <div className="cart-like con">
+        <BlueBtn>Add to cart</BlueBtn>
+        <div className="like-con ml-2">
+          <img className="" src="/images/pages/home/like.svg" alt="img" />
         </div>
-        <h1>Product Name</h1>
-        <p>If there is a product description, type it here</p>
-        <h2>₦234,000</h2>
-        <div className="cart-like con">
-            <BlueBtn>Add to cart</BlueBtn>
-            <div className="like-con ml-2">
-            <img className="" src="/images/pages/home/like.svg" alt="img" />
-            </div>
-        </div>
+      </div>
     </Con>
   )
 }
@@ -71,7 +71,7 @@ const Con = styled.section`
     .like-con{
         border-radius: 4px;
         border: 1px solid var(--primary-100, #D9DDFF);
-        width: 15%;
+        width: 40px;
         height: 40px; 
         display: flex;
         justify-content: center;

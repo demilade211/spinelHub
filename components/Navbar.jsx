@@ -84,12 +84,12 @@ const Navbar = () => {
                                 'aria-labelledby': 'basic-button',
                             }}
                         >
-                            <MenuItem onClick={handleClose}>Login</MenuItem>
-                            <MenuItem onClick={handleClose}>Sign Up</MenuItem>
+                            <MenuItem onClick={() => Router.push(`/auth/login`)}>Login</MenuItem>
+                            <MenuItem onClick={() => Router.push(`/auth/signup`)}>Sign Up</MenuItem>
                         </StyledMenu>
                     </div>
                 </div>
-                <div className={`mobile-nav ${showNav && "active"}`}>
+                {/* <div className={`mobile-nav ${showNav && "active"}`}>
                     <div className="close" onClick={() => setShowNav(false)} >
                         <img src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
                     </div>
@@ -99,13 +99,13 @@ const Navbar = () => {
                         <li onClick={() => Router.push(`/services`)}>Services</li>
                         <li onClick={() => Router.push(`/contact`)}>Contact</li>
                     </ul>
-                </div>
+                </div> */}
             </Con>
         </>
     )
 }
 
-const Con = styled.div`
+const Con = styled.div` 
     width:100%;     
     min-height: 90px;
     display: flex;

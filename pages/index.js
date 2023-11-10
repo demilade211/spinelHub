@@ -7,9 +7,11 @@ import DealsSection from '../components/pages/home/DealsSection';
 export default function Home() {
   return (
     <Con>
-      <HeroSection />
-      <SecondSection/>
-      <DealsSection/>
+      <AppLayout>
+        <HeroSection />
+        <SecondSection />
+        <DealsSection />
+      </AppLayout>
     </Con>
   );
 }

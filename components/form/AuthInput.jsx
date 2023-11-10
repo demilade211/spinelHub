@@ -14,7 +14,8 @@ const AuthInput = ({ place, withIcon, image, type, onChange, name, value, errors
   )
 }
 const InputLabelCon = styled.div`
-    margin-bottom:30px;
+    width: 100%;
+    margin-bottom:20px;
 `;
 const ErrorMessage = styled.div` 
     color: red;
@@ -31,11 +32,10 @@ const InputCon = styled.div`
     height:47px;
     display:flex; 
     align-items:center;
-    border-radius: 4px;
-    border: 1px solid #E5E5E5;
-    background: #FFF;
-    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.12);
-    padding:10px; 
+    border-radius: 12px;
+    border: 1px solid var(--grey-200, #B6B7BB);
+    background: #FFF; 
+    padding: 12px 16px;
     img{
         margin-right:10px;
         width:25px;
@@ -48,18 +48,18 @@ const InputCon = styled.div`
       outline:none;
       color: #FFF;
       color: var(--pure-black, #000);
-      font-family: Roboto;
+      font-family: Poppins;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: 16px; /* 100% */
       &::placeholder {
-        color: var(--pure-black, #000);
-        font-family: Roboto;
-        font-size: 16px;
+        color: var(--grey-400, #6B6C74); 
+        font-family: Poppins;
+        font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        line-height: 16px; /* 100% */
+        line-height: 150%; /* 21px */
       }
 
     }
