@@ -27,7 +27,7 @@ const Navbar = () => {
             <Con>
                 <div className='left' onClick={() => Router.push(`/`)}>
                     <img className="mob-ham mr-2" src="/images/components/ham.svg" alt="img" onClick={() => setShowNav(!showNav)} />
-                    <img src="/images/components/logo.svg" alt="img" />
+                    <img className="cursor-pointer	" src="/images/components/logo.svg" alt="img" />
                 </div>
                 <div className="right flex items-center">
                     <SearchCon>

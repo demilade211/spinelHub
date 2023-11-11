@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import {selectStyle} from "../../utils/CustomStyles"
 import Select from 'react-select'
 
-const MySelect = ({label,options,onChange,value}) => {
+const MySelect = ({label,options,onChange,value,place}) => {
   return (
     <InputLabelCon>
         <Label>{label}</Label>
-        <Select options={options} styles={selectStyle} value={value} onChange={onChange} placeholder="Select an option"/>
+        <Select options={options} styles={selectStyle} value={value} onChange={onChange} placeholder={`${place || "Select an option"}`}/>
     </InputLabelCon>
   )
 }

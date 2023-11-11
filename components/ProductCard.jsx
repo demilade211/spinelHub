@@ -64,9 +64,9 @@ const Con = styled.section`
     width: 100%;
     display: flex;
     align-items: center;
-    display: none;
+    visibility: hidden;
     @media (max-width: 1200px) { 
-        display: flex;
+        visibility: visible;
     }
     .like-con{
         border-radius: 4px;
@@ -81,7 +81,7 @@ const Con = styled.section`
   &:hover{
     box-shadow: 0px 30px 60px 0px rgba(41, 91, 255, 0.15);
     .con{
-        display: flex;
+        visibility: visible;
     }
   }
 `;

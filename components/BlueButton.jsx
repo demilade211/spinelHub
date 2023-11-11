@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const BlueButton = ({children,type}) => {
+const BlueButton = ({children,type,onClick}) => {
   return (
-    <BlueBtn>{children}</BlueBtn>
+    <BlueBtn onClick={onClick}>{children}</BlueBtn>
   )
 }
 

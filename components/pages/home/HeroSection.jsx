@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import BlueButton from '../../BlueButton';
+import Router from "next/router"
 
 const HeroSection = () => {
   return (
@@ -8,7 +9,7 @@ const HeroSection = () => {
       <Left>
         <h1>Your one-stop shop for premium IT hardware</h1>
         <div>
-          <BlueButton>Shop now</BlueButton>
+          <BlueButton onClick={() => Router.push(`/products`)}>Shop now</BlueButton>
         </div>
       </Left>
       <Right>

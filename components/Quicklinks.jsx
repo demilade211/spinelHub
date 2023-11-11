@@ -6,29 +6,29 @@ const Quicklinks = ({ next }) => {
     return (
         <Con>
             <span onClick={() => Router.push(`/`)}>Home</span>
-            <img className='mx-2' src="/images/components/next.svg" alt="img" />
-            <span>{next}</span>
+            <span className='mx-2'>/</span>
+            <span className='dark'>{next}</span>
         </Con>
     )
 }
 
 const Con = styled.div` 
     display: flex;
-    align-items: center;
-    @media (max-width: 1200px) { 
-        display: none;
-    }
+    align-items: center; 
     span{
-        color: var(--pure-black, #000);
-        font-family: Roboto;
+        color: var(--grey-700, #6B6C74); 
+        font-family: Poppins;
         font-size: 16px;
         font-style: normal;
-        font-weight: 300;
-        line-height: 150%; /* 24px */
-        cursor: pointer;
+        font-weight: 400;
+        line-height: 150%;
+         cursor: pointer;
         &:hover {
             color: var(--brand-color, #DB0F31); /* Remove background color on hover */  
             transition: 400ms ease-in;
+        }
+        &.dark{
+            color: var(--grey-700, #101113); 
         }
     }
 `;
