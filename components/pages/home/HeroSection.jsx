@@ -23,7 +23,7 @@ const Con = styled.section`
   height:55vh;
   display: flex;
   background: linear-gradient(90deg, #ECE9E6 0%, #FFF 100%);
-  margin-top: 90px; 
+  margin-top: 98px; 
   @media (max-width: 1200px) { 
     flex-direction: column;
     height: auto;

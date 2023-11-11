@@ -61,7 +61,7 @@ const Con = styled.section`
         font-weight: 400;
         line-height: 150%; /* 24px */
         @media (max-width: 1200px) { 
-            text-align: center;
+            text-align: left;
         }
     }
 `;
@@ -82,8 +82,7 @@ const FirstRow = styled.div`
         justify-content: center;
         @media (max-width: 1200px) { 
             display: flex;
-            flex-direction:column;
-            align-items: center;
+            flex-direction:column; 
             width: 100%;
             margin-bottom:40px;
         } 
@@ -94,8 +93,7 @@ const FirstRow = styled.div`
     .second{   
         display:flex;
         flex-direction:column;  
-        @media (max-width: 1200px) { 
-            align-items: center;
+        @media (max-width: 1200px) {  
             margin-bottom:40px;
         }
         h4{
@@ -108,7 +106,7 @@ const FirstRow = styled.div`
             margin-bottom:20px;
             text-transform: uppercase;
             @media (max-width: 1200px) { 
-                text-align: center;
+                text-align: left;
             }
         } 
         p{

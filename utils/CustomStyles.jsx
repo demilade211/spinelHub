@@ -95,3 +95,37 @@ export const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
       backgroundColor: theme.palette.mode === 'light' ? '#D88B07' : '#308fe8',
     },
   }));
+
+  export const selectStyle = {
+    control: (base) => ({
+        ...base,
+        height: "44px",
+        borderRadius: "12px",
+        border: "1px solid var(--grey-200, #B6B7BB)",
+        background: "none",
+        boxShadow: "none",
+        '&:hover': {
+            border: "1px solid #D0D3D8",
+        },
+        outline: "none",
+        fontFamily: "Poppins",
+        fontStyle: "normal",
+        fontWeight: 400,
+        fontSize: "14px",
+        color: "#FFF",
+    }),
+    indicatorSeparator: (styles) => ({ ...styles, display: "none" }),
+    placeholder: (base) => ({
+        ...base,
+        color: "var(--grey-400, #6B6C74)",
+        whiteSpace: "nowrap"
+    }),
+    input: (base) => ({
+        ...base,
+        color: "black",
+    }),
+    singleValue: (base) => ({
+        ...base,
+        color: "black",
+    }),
+};

@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const BlueButton = ({children,type}) => {
+const FullBlueButton = ({children,type}) => {
   return (
     <BlueBtn>{children}</BlueBtn>
   )
 }
 
 const BlueBtn = styled.button`  
-    min-width:181px;
+    width: 100%;
     height: 44px;
     display: flex;
     justify-content:center;
@@ -29,4 +29,5 @@ const BlueBtn = styled.button`
     outline:none; 
 `;
 
-export default BlueButton
+
+export default FullBlueButton

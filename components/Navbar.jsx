@@ -41,10 +41,10 @@ const Navbar = () => {
                     </CurrencyCon>
                     <div className="per-cart-love flex items-center">
                         <div className="icon">
-                            <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/cart.svg" alt="img" /></Badge>
+                            <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" /></Badge>
                         </div>
                         <div className="icon mx-3">
-                            <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/Heart.svg" alt="img" /></Badge>
+                            <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/wishlist`)} src="/images/components/Heart.svg" alt="img" /></Badge>
                         </div>
                         <div className="icon">
                             <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />
@@ -68,10 +68,10 @@ const Navbar = () => {
                         <img src="/images/components/Search.svg" alt="img" />
                     </div>
                     <div className="icon mr-3">
-                        <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/cart.svg" alt="img" /></Badge>
+                        <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" /></Badge>
                     </div>
                     <div className="icon mr-3">
-                        <Badge badgeContent={4} color="secondary"><img className="" src="/images/components/Heart.svg" alt="img" /></Badge>
+                        <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/wishlist`)} src="/images/components/Heart.svg" alt="img" /></Badge>
                     </div>
                     <div className="icon">
                         <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />
