@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from "styled-components";
 
-const AuthInput = ({ place, withIcon, image, type, onChange, name, value, errors }) => {
+const AuthInput = ({ place,label, withIcon, image, type, onChange, name, value, errors,classs }) => {
   return (
-    <InputLabelCon>
+    <InputLabelCon className={classs}>
+      <Label>{label}</Label>
       <InputCon>
         {withIcon && <img src={image} alt="img" />}
         <input type={type} placeholder={place} onChange={onChange} name={name} value={value} />
@@ -17,6 +18,18 @@ const InputLabelCon = styled.div`
     width: 100%;
     margin-bottom:20px;
 `;
+
+const Label = styled.p`
+  color: var(--grey-700, #101113);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  text-transform: capitalize;
+  margin-bottom:8px;
+`;
+
 const ErrorMessage = styled.div` 
     color: red;
     font-family: Montserrat;
@@ -45,8 +58,7 @@ const InputCon = styled.div`
       width:100%;
       background:none;
       border:none;
-      outline:none;
-      color: #FFF;
+      outline:none; 
       color: var(--pure-black, #000);
       font-family: Poppins;
       font-size: 16px;

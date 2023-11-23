@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import ProductCard from "../../ProductCard";
 
+
 const DealsSection = () => {
   const [active, setActive] = useState(0);
   return (
@@ -16,7 +17,7 @@ const DealsSection = () => {
         <p onClick={()=>setActive(1)} className={`not-active ${active === 1 && "active"}`}>Best Sellers</p>
       </div>
       <div className="products-con">
-        {[0,0,0,0,0,0,0].map(val=><ProductCard/>)}
+        {[1,2,3,4,5,6,7].map((val,index)=><ProductCard index={index}/>)}
       </div>
     </Con>
   )

@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components';
+import Router from "next/router"
 
-const ProductCard = () => {
+const ProductCard = ({index}) => {
   return (
-    <Con>
+    <Con onClick={() => Router.push(`/product/${index}`)}>
       <div className="img-con">
         <img className="" src="/images/pages/home/pic.png" alt="img" />
       </div>

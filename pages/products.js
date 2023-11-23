@@ -27,7 +27,7 @@ const products = () => {
                         )}
                     </Left>
                     <Right>
-                        {[0, 0, 0, 0, 0, 0, 0].map(val => <ProductCard />)}
+                        {[0, 0, 0, 0, 0, 0, 0].map((val,index) => <ProductCard index={index}/>)}
                     </Right>
                 </div>
             </Con>
@@ -92,8 +92,7 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-    width: 100%;    
-    width: 100%;
+    width: 100%;   
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap:10px;

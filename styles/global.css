@@ -17,3 +17,7 @@ body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
 }
+
+.css-1fmjonz-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  padding: 0;
+}

@@ -2,7 +2,7 @@ import { styled, alpha } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import LinearProgress,{ linearProgressClasses } from '@mui/material/LinearProgress';
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 export const StyledMenu = styled((props) => (
     <Menu
@@ -23,7 +23,7 @@ export const StyledMenu = styled((props) => (
 ))(({ theme }) => ({
     '& .MuiPaper-root': {
         borderRadius: 6,
-        marginTop: theme.spacing(1), 
+        marginTop: theme.spacing(1),
         fontFamily: "'Poppins', sans-serif",
         fontSize: "4px",
         color:
@@ -50,6 +50,40 @@ export const StyledMenu = styled((props) => (
     },
 }));
 
+export const BlueTabs = styled((props) => (
+    <Tabs
+        {...props}
+        TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    />
+))({
+    '& .MuiTabs-indicator': {
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+
+    },
+    '& .MuiTabs-indicatorSpan': {
+        width: '100%',
+        backgroundColor: '#295BFF',
+    },
+});
+
+export const BlueTab = styled((props) => <Tab disableRipple {...props} />)(
+    ({ theme }) => ({
+        textTransform: 'none',
+        fontWeight: "500",
+        fontSize: "18px",
+        fontFamily: ' Poppins',
+        color: '#6B6C74',
+        '&.Mui-selected': {
+            color: '#295BFF',
+        },
+        '&.Mui-focusVisible': {
+            backgroundColor: 'rgba(100, 95, 228, 0.32)',
+        },
+    }),
+);
+
 
 export const StyledTabs = styled((props) => (
     <Tabs
@@ -62,21 +96,21 @@ export const StyledTabs = styled((props) => (
         justifyContent: 'center',
         backgroundColor: 'transparent',
     },
-    '& .MuiTabs-indicatorSpan': { 
-        width: '80%',
-        backgroundColor: '#D88B07',
+    '& .MuiTabs-indicatorSpan': {
+        width: '100%',
+        backgroundColor: '#101113',
     },
 });
 
 export const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-    ({ theme }) => ({ 
+    ({ theme }) => ({
         textTransform: 'none',
-        fontWeight: "400",
-        fontSize: "16px",
-        fontFamily: 'Euclid Circular A', 
-        color: '#808899',
+        fontWeight: "500",
+        fontSize: "20px",
+        fontFamily: ' Poppins',
+        color: '#6B6C74',
         '&.Mui-selected': {
-            color: '#D88B07',
+            color: '#101113',
         },
         '&.Mui-focusVisible': {
             backgroundColor: 'rgba(100, 95, 228, 0.32)',
@@ -88,18 +122,52 @@ export const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
     borderRadius: 5,
     [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+        backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
     },
     [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: theme.palette.mode === 'light' ? '#D88B07' : '#308fe8',
+        borderRadius: 5,
+        backgroundColor: theme.palette.mode === 'light' ? '#D88B07' : '#308fe8',
     },
-  }));
+}));
 
-  export const selectStyle = {
+export const selectStyle = {
     control: (base) => ({
         ...base,
         height: "44px",
+        borderRadius: "12px",
+        border: "1px solid var(--grey-200, #B6B7BB)",
+        background: "none",
+        boxShadow: "none",
+        '&:hover': {
+            border: "1px solid #D0D3D8",
+        },
+        outline: "none",
+        fontFamily: "Poppins",
+        fontStyle: "normal",
+        fontWeight: 400,
+        fontSize: "14px",
+        color: "#FFF",
+    }),
+    indicatorSeparator: (styles) => ({ ...styles, display: "none" }),
+    placeholder: (base) => ({
+        ...base,
+        color: "var(--grey-400, #6B6C74)",
+        whiteSpace: "nowrap"
+    }),
+    input: (base) => ({
+        ...base,
+        color: "black",
+    }),
+    singleValue: (base) => ({
+        ...base,
+        color: "black",
+    }),
+};
+
+export const selectStyle2 = {
+    control: (base) => ({
+        ...base,
+        height: "47px",
         borderRadius: "12px",
         border: "1px solid var(--grey-200, #B6B7BB)",
         background: "none",
