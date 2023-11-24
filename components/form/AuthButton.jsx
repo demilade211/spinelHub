@@ -31,7 +31,7 @@ const Btn = styled.button`
 
     &:disabled,
     button[disabled]{ 
-      background: #ECC583;
+      background:  #ccd8ff;
       color:white;
     }
 

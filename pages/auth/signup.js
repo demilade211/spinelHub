@@ -50,6 +50,7 @@ const SignUp = () => {
           <img src="/images/pages/auth/logo.svg" alt="img" />
         </div>
         <p className='sub'>Create an account or <Link href="/auth/login">Sign in </Link></p>
+        <AuthInput place="Full Name" type="text" />
         <AuthInput place="Email address" type="text" />
         <AuthInput place="Password" type="password" />
         <div className='forgot-con mb-5'>

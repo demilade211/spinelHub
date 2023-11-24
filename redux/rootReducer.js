@@ -3,7 +3,7 @@ import loaderSlice from './slices/loaderSlice';
 import userSlice from './slices/userSlice';
 
 const rootReducer = combineReducers({
-    user: userSlice,
-    loader:loaderSlice
+    userReducer: userSlice,
+    loaderReducer:loaderSlice
   });
   export default rootReducer;

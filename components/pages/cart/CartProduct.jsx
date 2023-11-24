@@ -144,6 +144,11 @@ const CountBtn = styled.button`
     line-height: 150%; /* 24px */
     cursor:pointer;
     outline:none; 
+    &:disabled,
+    button[disabled]{ 
+      background:  #ccd8ff;
+      color:white;
+    }
 `;
 
 export default CartProduct

@@ -5,6 +5,10 @@ import AuthInput from '../../components/form/AuthInput';
 import AuthButton from '../../components/form/AuthButton';
 import Link from "next/link";
 import Router from "next/router"
+import { loginUser } from "../../services/auth"
+import cookie from "js-cookie"
+import MySnackBar from '../../components/MySnackBar';
+import validateInput from "../../utils/validateInput"
 
 const Login = () => {
 
@@ -22,40 +26,51 @@ const Login = () => {
         isComplete ? setButtonDisabled(false) : setButtonDisabled(true)
     }, [user])
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    //     const form = new FormData();
-    //     form.set('email', user.email);
-    //     form.set('password', user.password);
+        const form = new FormData();
+        form.set('email', user.email);
+        form.set('password', user.password);
 
-    //     setButtonDisabled(true)
-    //     setLoading(true)
+        setButtonDisabled(true)
+        setLoading(true)
 
-    //     if (validateInput(user, setSnackInfo, setButtonDisabled, setLoading)) {
-    //         dispatch({
-    //             type: "ADD_USER",
-    //             payload: user,
-    //         })
+        if (validateInput(user, setSnackInfo, setButtonDisabled, setLoading)) {
 
-    //         await loginUser(form, setSnackInfo, setButtonDisabled, setLoading)
-    //     }
+            try {
+                const response = await loginUser(form)
+                setLoading(false)
+
+                cookie.set("token", response.token, { expires: 365 })
+                window.location.href = "/"
+            } catch (error) {
+                setLoading(false)
+                setButtonDisabled(false);
+                setSnackInfo(prev => ({ ...prev, openSnack: true, type: "error", message: error.message }))
+            }
+        }
 
 
-    // }
+    }
+    const handleChange = (e) => {
+        const { name, value } = e.target// takes the name and vale of event currently changing
+        setUser(prev => ({ ...prev, [name]: value }))
+    }
     return (
         <Con>
             <InnerCon>
+                <MySnackBar setSnackInfo={setSnackInfo} snackInfo={snackInfo} />
                 <div className='logo mb-3' onClick={() => Router.push(`/`)}>
                     <img src="/images/pages/auth/logo.svg" alt="img" />
                 </div>
                 <p className='sub'>Sign in or <Link href="/auth/signup">create an account</Link></p>
-                <AuthInput place="Email address" type="text"/>
-                <AuthInput place="Password" type="password"/>
+                <AuthInput place="Email address" type="text" onChange={handleChange} name="email" />
+                <AuthInput place="Password" type="password" onChange={handleChange} name="password" />
                 <div className='forgot-con mb-5'>
                     <p className="forgot">Forgot Password?</p>
                 </div>
-                <AuthButton content="Continue"/>
+                <AuthButton onClick={handleSubmit} content={`${loading ? 'loading...' : 'Log in'}`} disabled={buttonDisabled} />
                 <p className='agree'>By continuing, you agree to SpinelHub's <span>Terms of Service</span> and <span>Privacy Policy </span></p>
             </InnerCon>
         </Con>

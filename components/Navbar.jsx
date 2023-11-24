@@ -7,11 +7,22 @@ import Badge from '@mui/material/Badge';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { StyledMenu } from '../utils/CustomStyles'
+import Avatar from '@mui/material/Avatar';
+import { stringAvatar, stringToColor } from "../utils/helpers"
+import { useDispatch, useSelector } from 'react-redux'
+import { logOut } from "../services/auth"
 
 const Navbar = () => {
+    const { user, status } = useSelector((state) => state.userReducer);
+
+    const cartValue = status === "Authenticated"?user.cartItems.length:0;
+    const wishValue = status === "Authenticated"?user.wishItems.length:0; 
+
     const [showNav, setShowNav] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl1, setAnchorEl1] = React.useState(null);
     const open = Boolean(anchorEl);
+    const open1 = Boolean(anchorEl1);
 
     const router = useRouter();
     const handleClick = (event) => {
@@ -20,6 +31,13 @@ const Navbar = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const handleClick1 = (event) => {
+        setAnchorEl1(event.currentTarget);
+    };
+    const handleClose1 = () => {
+        setAnchorEl1(null);
+    };
+    
 
     const isActive = route => router.pathname === route;
     return (
@@ -41,13 +59,22 @@ const Navbar = () => {
                     </CurrencyCon>
                     <div className="per-cart-love flex items-center">
                         <div className="icon">
-                            <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" /></Badge>
+                            <Badge badgeContent={Number(cartValue)} color="secondary"><img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" /></Badge>
                         </div>
                         <div className="icon mx-3">
-                            <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/wishlist`)} src="/images/components/Heart.svg" alt="img" /></Badge>
+                            <Badge badgeContent={Number(wishValue)} color="secondary"><img onClick={() => Router.push(`/wishlist`)} src="/images/components/Heart.svg" alt="img" /></Badge>
                         </div>
                         <div className="icon">
-                            <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />
+                            {status === "Authenticated" ? <Avatar onClick={handleClick1} {...stringAvatar(user.name)} /> : <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />}
+                            <StyledMenu
+                                id="basic-menu1"
+                                anchorEl={anchorEl1}
+                                open={open1}
+                                onClose={handleClose1}
+                            >
+                                <MenuItem onClick={() => Router.push(`/profile`)}>Profile</MenuItem>
+                                <MenuItem onClick={logOut}>Logout</MenuItem>
+                            </StyledMenu>
                             <StyledMenu
                                 id="basic-menu"
                                 anchorEl={anchorEl}
@@ -57,8 +84,8 @@ const Navbar = () => {
                                     'aria-labelledby': 'basic-button',
                                 }}
                             >
-                                <MenuItem onClick={handleClose}>Login</MenuItem>
-                                <MenuItem onClick={handleClose}>Sign Up</MenuItem>
+                                <MenuItem onClick={() => Router.push(`/auth/login`)}>Login</MenuItem>
+                                <MenuItem onClick={() => Router.push(`/auth/signup`)}>Sign Up</MenuItem>
                             </StyledMenu>
                         </div>
                     </div>
@@ -68,13 +95,22 @@ const Navbar = () => {
                         <img src="/images/components/Search.svg" alt="img" />
                     </div>
                     <div className="icon mr-3">
-                        <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" /></Badge>
+                        <Badge badgeContent={cartValue} color="secondary"><img onClick={() => Router.push(`/cart`)} src="/images/components/cart.svg" alt="img" /></Badge>
                     </div>
                     <div className="icon mr-3">
-                        <Badge badgeContent={4} color="secondary"><img onClick={() => Router.push(`/wishlist`)} src="/images/components/Heart.svg" alt="img" /></Badge>
+                        <Badge badgeContent={wishValue} color="secondary"><img onClick={() => Router.push(`/wishlist`)} src="/images/components/Heart.svg" alt="img" /></Badge>
                     </div>
                     <div className="icon">
-                        <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />
+                        {status === "Authenticated" ? <Avatar onClick={handleClick1} {...stringAvatar(user.name)} /> : <img onClick={handleClick} className="" src="/images/components/Profile.svg" alt="img" />}
+                        <StyledMenu
+                            id="basic-menu1"
+                            anchorEl={anchorEl1}
+                            open={open1}
+                            onClose={handleClose1}
+                        >
+                            <MenuItem onClick={() => Router.push(`/profile`)}>Profile</MenuItem>
+                            <MenuItem onClick={logOut}>Logout</MenuItem>
+                        </StyledMenu>
                         <StyledMenu
                             id="basic-menu"
                             anchorEl={anchorEl}
