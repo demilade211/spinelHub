@@ -1,18 +1,41 @@
 import React from 'react'
 import styled from 'styled-components';
 import Router from "next/router"
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../services/product"
+import { AddToCart, RemoveFromCart } from "../redux/slices/userSlice";
 
-const ProductCard = ({index}) => {
+const ProductCard = ({ product }) => {
+
+  const { user } = useSelector((state) => state.userReducer);
+
+  const dispatch = useDispatch();
+
+  let isInCart = user.cartItems.find(item => item?.product._id.toString() === product._id.toString());
+  const trimmedText = product.description.slice(0, 55);
+  const trimmedName = product.name.slice(0, 50);
+
+  const handleAddToCart = async (e) => {
+    if (isInCart) {
+      dispatch(RemoveFromCart(product._id)) 
+    } else{
+      dispatch(AddToCart({ product, quantity: 1 }))
+      await addToCart(product._id)
+
+    }
+
+  }
+  console.log(product.images[0].url);
   return (
-    <Con onClick={() => Router.push(`/product/${index}`)}>
-      <div className="img-con">
-        <img className="" src="/images/pages/home/pic.png" alt="img" />
+    <Con key={product._id} >
+      <div className="img-con" onClick={() => Router.push(`/product/${product._id}`)}>
+        <img className="" src={product.images[0].url} alt="img" />
       </div>
-      <h1>Product Name</h1>
-      <p>If there is a product description, type it here</p>
-      <h2>₦234,000</h2>
+      <h1 onClick={() => Router.push(`/product/${product._id}`)}>{trimmedName}</h1>
+      <p onClick={() => Router.push(`/product/${product._id}`)}>{trimmedText}...</p>
+      <h2>₦{product.price}</h2>
       <div className="cart-like con">
-        <BlueBtn>Add to cart</BlueBtn>
+        <BlueBtn onClick={handleAddToCart}>{`${isInCart?"Remove":"Add to cart"}`}</BlueBtn>
         <div className="like-con ml-2">
           <img className="" src="/images/pages/home/like.svg" alt="img" />
         </div>

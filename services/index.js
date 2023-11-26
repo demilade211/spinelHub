@@ -7,6 +7,8 @@ const instance = axios.create({
   headers: {Authorization:cookie.get("token")}
 });
 
+export const baseURL = "https://spinel-backend.onrender.com"
+
 
 
 export default instance

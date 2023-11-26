@@ -16,5 +16,6 @@ function MyApp({ Component, pageProps }) {
         </Provider>
     )
 }
+ 
 
 export default MyApp

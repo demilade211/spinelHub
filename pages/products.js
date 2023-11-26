@@ -1,18 +1,45 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AppLayout from '../layouts/AppLayout';
 import styled from "styled-components";
 import MySelect from '../components/form/MySelect';
 import ProductCard from '../components/ProductCard';
 import { FaBeer } from 'react-icons/fa';
 import Quicklinks from '../components/Quicklinks';
+import MySnackBar from '../components/MySnackBar';
+import cookie from "js-cookie"
+import { baseURL } from "../services"
+import { getAllProduct } from "../services/product"
 
-const products = () => {
+
+const Products = ({ productsData }) => {
+    const [snackInfo, setSnackInfo] = React.useState({ openSnack: false, type: "", message: "" })
+    const [loading, setLoading] = React.useState(false)
+    const [products, setProducts] = React.useState([])
+
+    useEffect(() => {
+        try {
+            const fetchProducts = async () => {
+                setLoading(true)
+                const response = await getAllProduct() 
+                setLoading(false)
+                setProducts(response.products)
+            };
+            fetchProducts();
+
+        } catch (error) {
+            setLoading(false)
+            alert(error)
+        }
+    }, []);
+
+    console.log(products);
     return (
         <AppLayout>
             <QuickLinkCon>
-                <Quicklinks next="All categories"/>
+                <Quicklinks next="All categories" />
             </QuickLinkCon>
             <Con>
+                <MySnackBar setSnackInfo={setSnackInfo} snackInfo={snackInfo} />
                 <div className='w-full flex items-center justify-between'>
                     <h1 className='p-head'>All categories</h1>
                     <MySelect place="Sort By" />
@@ -27,13 +54,19 @@ const products = () => {
                         )}
                     </Left>
                     <Right>
-                        {[0, 0, 0, 0, 0, 0, 0].map((val,index) => <ProductCard index={index}/>)}
+                        {
+                            loading ?
+                                <div>loading</div>
+                                :
+                                products?.map((val, index) => <ProductCard setSnackInfo={setSnackInfo} product={val} />)
+                        }
                     </Right>
                 </div>
             </Con>
         </AppLayout>
     )
 }
+
 const Con = styled.div`
     width: 100%; 
     padding: 24px 120px 40px 120px;  
@@ -54,7 +87,7 @@ const Con = styled.div`
         display: grid;
         grid-template-columns:30% 70%;
         column-gap:15px;
-        row-gap:15px;
+        row-gap:10px;
         @media (max-width: 1200px) { 
             grid-template-columns: 100%;
         }
@@ -107,4 +140,4 @@ const Right = styled.div`
     }
 `;
 
-export default products
+export default Products

@@ -4,6 +4,7 @@ import { SetUser, SetExpired } from "../redux/slices/userSlice";
 import { ShowLoader, HideLoader } from "../redux/slices/loaderSlice";
 import { getLoggedInUser } from "../services/auth"
 import cookie from "js-cookie"
+import AppLoader from '../components/loaders/AppLoader';
 
 const AppGuard = ({children}) => {
   const {loader} = useSelector(state => state.loaderReducer)
@@ -41,7 +42,7 @@ const AppGuard = ({children}) => {
 
   return (
     <>
-      {loader?<div>Loading</div>:children} 
+      {loader?<AppLoader/>:children} 
     </>
   )
 }

@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import ProductCard from "../../ProductCard";
-
+import { getAllProduct } from "../../../services/product"
+import Router from "next/router"
 
 const DealsSection = () => {
   const [active, setActive] = useState(0);
+  const [loading, setLoading] = React.useState(false)
+  const [products, setProducts] = React.useState([])
+  const [snackInfo, setSnackInfo] = React.useState({ openSnack: false, type: "", message: "" })
+
+  useEffect(() => {
+    try {
+      const fetchProducts = async () => {
+        setLoading(true)
+        const response = await getAllProduct()
+        setLoading(false)
+        setProducts(response.products)
+      };
+      fetchProducts();
+
+    } catch (error) {
+      setLoading(false)
+      alert(error)
+    }
+  }, []);
   return (
     <Con>
       <div className="head">
@@ -13,11 +33,19 @@ const DealsSection = () => {
         <div className="line"></div>
       </div>
       <div className="tab-con">
-        <p onClick={()=>setActive(0)} className={`not-active ${active === 0 && "active"}`}>New Arrivals</p>
-        <p onClick={()=>setActive(1)} className={`not-active ${active === 1 && "active"}`}>Best Sellers</p>
+        <p onClick={() => setActive(0)} className={`not-active ${active === 0 && "active"}`}>New Arrivals</p>
+        <p onClick={() => setActive(1)} className={`not-active ${active === 1 && "active"}`}>Best Sellers</p>
       </div>
       <div className="products-con">
-        {[1,2,3,4,5,6,7].map((val,index)=><ProductCard index={index}/>)}
+        {
+          loading ?
+            <div>loading</div>
+            :
+            products?.map((val, index) => <ProductCard setSnackInfo={setSnackInfo} product={val} />)
+        }
+      </div>
+      <div className="see-all mx-6 flex items-center justify-center" onClick={() => Router.push(`/products`)}>
+        <p>See all</p>
       </div>
     </Con>
   )
@@ -89,6 +117,22 @@ const Con = styled.section`
     }
     @media (max-width: 400px) { 
       grid-template-columns: 1fr ; 
+    }
+  }
+  .see-all{
+    width: 181px;
+    height: 44px;
+    border-radius: 4px;
+    border: 2px solid var(--primary-100, #D9DDFF);
+    cursor: pointer;
+    p{
+      color: var(--primary-base, #295BFF);
+      text-align: center;
+      font-family: Poppins;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 24px */
     }
   }
 `;
