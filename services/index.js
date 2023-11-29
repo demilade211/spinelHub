@@ -7,9 +7,7 @@ const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const instance = axios.create({
   baseURL: `${apiUrl}`, // Replace with your base URL
   headers: {Authorization:cookie.get("token")}
-});
-
-export const baseURL = "Spinel-hub-env-2.eba-ad9m9bcp.us-east-1.elasticbeanstalk.com"
+}); 
 
 
 
