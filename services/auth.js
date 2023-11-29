@@ -46,7 +46,7 @@ export const loginUser = async (user ) => {
         return res.data 
 
     } catch (error) {
-        return error.response.data
+        return error
     }
 
 }

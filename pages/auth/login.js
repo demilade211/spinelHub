@@ -47,7 +47,7 @@ const Login = () => {
             } catch (error) {
                 setLoading(false)
                 setButtonDisabled(false);
-                setSnackInfo(prev => ({ ...prev, openSnack: true, type: "error", message: error.message }))
+                setSnackInfo(prev => ({ ...prev, openSnack: true, type: "error", message: error.response.data.message }))
             }
         }
 
