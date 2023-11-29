@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
 
   const dispatch = useDispatch();
 
-  let isInCart = user.cartItems.find(item => item?.product._id.toString() === product._id.toString());
+  let isInCart = user?.cartItems.find(item => item?.product._id.toString() === product._id.toString());
   const trimmedText = product.description.slice(0, 55);
   const trimmedName = product.name.slice(0, 50);
 

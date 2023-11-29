@@ -5,6 +5,7 @@ import { ShowLoader, HideLoader } from "../redux/slices/loaderSlice";
 import { getLoggedInUser } from "../services/auth"
 import cookie from "js-cookie"
 import AppLoader from '../components/loaders/AppLoader';
+import Router from "next/router" 
 
 const AppGuard = ({children}) => {
   const {loader} = useSelector(state => state.loaderReducer)
@@ -25,10 +26,19 @@ const AppGuard = ({children}) => {
       } else {
         if (response.message === "JSON Web Token is expired. Try Again!!!") {
           dispatch(SetExpired("expired"))
+          cookie.remove("token");
+          Router.push("/auth/login");
+        }else{
+          dispatch(SetExpired("Unauthenticated"))
+          cookie.remove("token");
+          Router.push("/auth/login");
         }
       }
     } catch (error) {
       dispatch(HideLoader())
+      dispatch(SetExpired("Unauthenticated"))
+      cookie.remove("token");
+      Router.push("/auth/login");
     }
   }, [dispatch])
 
