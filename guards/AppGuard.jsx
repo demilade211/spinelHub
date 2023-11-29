@@ -32,9 +32,9 @@ const AppGuard = ({children}) => {
       }
     } catch (error) {
       dispatch(HideLoader())
-      dispatch(SetExpired("Unauthenticated"))
-      cookie.remove("token");
-      Router.push("/auth/login");
+      // dispatch(SetExpired("Unauthenticated"))
+      // cookie.remove("token");
+      // Router.push("/auth/login");
     }
   }, [dispatch])
 

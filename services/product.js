@@ -9,7 +9,7 @@ export const getAllProduct = async () => {
         return res.data 
 
     } catch (error) {
-        return error.response.data;
+        return error;
 
     }
 
@@ -27,7 +27,7 @@ export const getOneProduct = async (productId) => {
         return res.data 
 
     } catch (error) {
-        return error.response.data;
+        return error;
 
     }
 
@@ -44,7 +44,7 @@ export const addToCart = async (productId) => {
         return res.data 
 
     } catch (error) {
-        return error.response.data;
+        return error;
 
     }
 
