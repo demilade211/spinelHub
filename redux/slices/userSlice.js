@@ -21,9 +21,15 @@ const userSlice = createSlice({
     RemoveFromCart: (state, action) => { 
       state.user.cartItems=state.user.cartItems.filter(val=>val.product._id.toString()!==action.payload)
     },
+    AddToWish: (state, action) => { 
+      state.user.wishItems=[...state.user.wishItems,action.payload]
+    }, 
+    RemoveFromWish: (state, action) => { 
+      state.user.wishItems=state.user.wishItems.filter(val=>val.product._id.toString()!==action.payload)
+    },
   },
 });
 
-export const { SetUser , SetExpired,AddToCart,RemoveFromCart } = userSlice.actions;
+export const { SetUser , SetExpired,AddToCart,RemoveFromCart,AddToWish,RemoveFromWish } = userSlice.actions;
 
 export default userSlice.reducer;

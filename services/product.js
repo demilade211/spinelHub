@@ -34,8 +34,7 @@ export const getOneProduct = async (productId) => {
 
 }
 
-export const addToCart = async (productId) => {
-
+export const addToCart = async (productId) => { 
 
     try {
         const res = await axios.post(`/api/v1/products/cart/${productId}`)
@@ -46,7 +45,61 @@ export const addToCart = async (productId) => {
     } catch (error) {
         return error;
 
-    }
+    } 
+}
+
+export const removeFromCart = async (productId) => {
 
 
+    try {
+        const res = await axios.delete(`/api/v1/products/cart/${productId}`)
+
+        const { success, message } = res.data
+        return res.data 
+
+    } catch (error) {
+        return error;
+
+    } 
+}
+
+export const addToWishList = async (productId) => { 
+
+    try {
+        const res = await axios.post(`/api/v1/products/wishList/${productId}`)
+
+        const { success, message } = res.data
+        return res.data 
+
+    } catch (error) {
+        return error;
+
+    } 
+}
+
+export const removeFromWishList = async (productId) => { 
+
+    try {
+        const res = await axios.delete(`/api/v1/products/wishList/${productId}`)
+
+        const { success, message } = res.data
+        return res.data 
+
+    } catch (error) {
+        return error;
+
+    } 
+}
+export const UpdateQuantity = async (productId,obj) => { 
+
+    try {
+        const res = await axios.put(`/api/v1/products/cart/${productId}`,obj)
+
+        const { success, message } = res.data
+        return res.data 
+
+    } catch (error) {
+        return error;
+
+    } 
 }

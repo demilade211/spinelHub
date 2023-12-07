@@ -6,15 +6,19 @@ import CartProduct from '../components/pages/cart/CartProduct';
 import FullBlueButton from '../components/FullBlueButton';
 import MySelect from '../components/form/MySelect';
 import BlueButton from '../components/BlueButton';
+import { useDispatch, useSelector } from "react-redux";
 
 const cart = () => {
+
+    const { user, status } = useSelector((state) => state.userReducer);
+
     return (
         <AppLayout>
             <Con>
                 <div className='grid-con'>
-                    <GreyBox title={`Cart(${2})`}>
+                    <GreyBox title={`Cart(${user?.cartItems.length || 0})`}>
                         <InCartCon>
-                            {[0, 0].map(val => <CartProduct />)}
+                            {user?.cartItems.map(val => <CartProduct key={val.product._id} val={val}/>)}
                         </InCartCon>
                     </GreyBox>
                     <GreyBox title="Cart Summary">

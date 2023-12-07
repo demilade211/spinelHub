@@ -6,14 +6,18 @@ import FullBlueButton from '../components/FullBlueButton';
 import MySelect from '../components/form/MySelect';
 import BlueButton from '../components/BlueButton';
 import WishProduct from '../components/pages/wish/WishProduct';
+import { useDispatch, useSelector } from "react-redux";
 
 const wishlist = () => {
+
+    const { user, status } = useSelector((state) => state.userReducer);
+
     return (
         <AppLayout>
             <Con>
-                <GreyBox title={`Wishlist(${2})`}>
+                <GreyBox title={`Wishlist(${user?.wishItems.length || 0})`}>
                     <InCartCon>
-                        {[0, 0].map(val => <WishProduct />)}
+                        {user?.wishItems.map(val => <WishProduct key={val.product._id} val={val}/>)}
                     </InCartCon>
                 </GreyBox>
                 <Navi>

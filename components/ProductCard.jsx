@@ -2,26 +2,48 @@ import React from 'react'
 import styled from 'styled-components';
 import Router from "next/router"
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../services/product"
-import { AddToCart, RemoveFromCart } from "../redux/slices/userSlice";
+import { addToCart, removeFromCart,addToWishList,removeFromWishList } from "../services/product"
+import { AddToCart, RemoveFromCart,AddToWish,RemoveFromWish } from "../redux/slices/userSlice";
 
 const ProductCard = ({ product }) => {
 
-  const { user } = useSelector((state) => state.userReducer);
+  const { user, status } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
 
   let isInCart = user?.cartItems.find(item => item?.product._id.toString() === product._id.toString());
+  let isInWishlist = user?.wishItems.find(item => item?.product._id.toString() === product._id.toString());
   const trimmedText = product.description.slice(0, 55);
   const trimmedName = product.name.slice(0, 50);
 
-  const handleAddToCart = async (e) => {
-    if (isInCart) {
-      dispatch(RemoveFromCart(product._id)) 
-    } else{
-      dispatch(AddToCart({ product, quantity: 1 }))
-      await addToCart(product._id)
+  const handleAddToWish = async (e) => {
+    if (status !== "Unauthenticated") {
+      if (isInWishlist) {
+        dispatch(RemoveFromWish(product._id))
+        await removeFromWishList(product._id)
+      } else {
+        dispatch(AddToWish({product}))
+        await addToWishList(product._id)
 
+      }
+    } else {
+      Router.push("/auth/login");
+    }
+
+  }
+
+  const handleAddToCart = async (e) => {
+    if (status !== "Unauthenticated") {
+      if (isInCart) {
+        dispatch(RemoveFromCart(product._id))
+        await removeFromCart(product._id)
+      } else {
+        dispatch(AddToCart({ product, quantity: 1 }))
+        await addToCart(product._id)
+
+      }
+    } else {
+      Router.push("/auth/login");
     }
 
   }
@@ -35,9 +57,10 @@ const ProductCard = ({ product }) => {
       <p onClick={() => Router.push(`/product/${product._id}`)}>{trimmedText}...</p>
       <h2>₦{product.price}</h2>
       <div className="cart-like con">
-        <BlueBtn onClick={handleAddToCart}>{`${isInCart?"Remove":"Add to cart"}`}</BlueBtn>
-        <div className="like-con ml-2">
-          <img className="" src="/images/pages/home/like.svg" alt="img" />
+        <BlueBtn onClick={handleAddToCart}>{`${isInCart ? "Remove" : "Add to cart"}`}</BlueBtn>
+        <div className="like-con ml-2" onClick={handleAddToWish}>
+          {!isInWishlist&&<img className="" src="/images/pages/home/like.svg" alt="img" />}
+          {isInWishlist&&<img className="" src="/images/pages/home/unlike.svg" alt="img" />}
         </div>
       </div>
     </Con>

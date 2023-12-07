@@ -46,10 +46,10 @@ const Products = ({ productsData }) => {
                 </div>
                 <div className='grid-con'>
                     <Left>
-                        {[0, 0, 0, 0, 0, 0, 0].map(val =>
+                        {["Network Cameras", "Software", "Network Switches", "Cables", "Security Doors", "Server and Storage"].map(val =>
                             <div className='flex items-center mb-5'>
                                 <FaBeer />
-                                <p className='ml-3'>Devices</p>
+                                <p className='ml-3'>{val}</p>
                             </div>
                         )}
                     </Left>

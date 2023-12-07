@@ -1,39 +1,58 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
+import { UpdateQuantity,removeFromCart } from "../../../services/product"
+import { AddToCart, RemoveFromCart, AddToWish, RemoveFromWish } from "../../../redux/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const CartProduct = () => {
+const CartProduct = ({ val }) => {
+
+    const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(val.quantity)
+
+    const handleQuantity = async (type) => {
+        type === "reduce" ? setQuantity(quantity - 1) : setQuantity(quantity + 1)
+        await UpdateQuantity(val.product._id, { action: type })
+
+    }
+
+    const handleCart = async (e) => {
+        dispatch(RemoveFromCart(val.product._id))
+        await removeFromCart(val.product._id)
+
+    }
+
     return (
         <Con>
             <div className='left flex items-center justify-between flex-wrap'>
                 <div className='flex items-center justify-between'>
-                    <img className="" src="/images/pages/cart/spic.png" alt="img" />
+                    <img className="" src={val.product.images[0].url} alt="img" />
                     <div>
-                        <h2 className='p-name'>Product Name</h2>
-                        <p className='avail'>In stock</p>
+                        <h2 className='p-name'>{val.product.name}</h2>
+                        <p className='avail'>{`${Number(val.product.stock) >= 1 ? "In Stock" : "Out Of Stock"}`}</p>
                     </div>
                 </div>
-                <p className='price'>₦234,000</p>
+                <p className='price'>₦{val.product.price}</p>
             </div>
             <div className='right flex items-center justify-between'>
                 <QuantityCon>
-                    <CountBtn>-</CountBtn>
-                    <p className='count'>2</p>
-                    <CountBtn>+</CountBtn>
+                    <CountBtn onClick={() => handleQuantity("reduce")} disabled={quantity < 2}>-</CountBtn>
+                    <p className='count'>{quantity}</p>
+                    <CountBtn onClick={() => handleQuantity("increase")}>+</CountBtn>
                 </QuantityCon>
-                <DelCon>
+                <DelCon onClick={handleCart}>
                     <img className="mr-3" src="/images/pages/cart/trash.svg" alt="img" />
                     <p className='text'>Remove</p>
                 </DelCon>
             </div>
             <div className='mob-right flex items-center justify-between'>
-                <DelCon>
+                <DelCon onClick={handleCart}>
                     <img className="mr-3" src="/images/pages/cart/trash.svg" alt="img" />
                     <p className='text'>Remove</p>
                 </DelCon>
                 <QuantityCon>
-                    <CountBtn>-</CountBtn>
-                    <p className='count'>2</p>
-                    <CountBtn>+</CountBtn>
+                    <CountBtn onClick={() => handleQuantity("reduce")} disabled={quantity < 2}>-</CountBtn>
+                    <p className='count'>{quantity}</p>
+                    <CountBtn onClick={() => handleQuantity("increase")}>+</CountBtn>
                 </QuantityCon>
             </div>
         </Con>
@@ -56,7 +75,7 @@ const Con = styled.div`
         .p-name{ 
             color: var(--grey-700, #101113);
             font-family: Poppins;
-            font-size: 16px;
+            font-size: 14px;
             font-style: normal;
             font-weight: 500;
             line-height: 150%; /* 24px */
@@ -116,6 +135,7 @@ const QuantityCon = styled.div`
 const DelCon = styled.span` 
     display: flex;
     align-items: center;
+    cursor: pointer;
     .text{
         color: var(--secondary-300, #FF6229);
         text-align: center; 
