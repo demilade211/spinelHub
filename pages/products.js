@@ -48,7 +48,7 @@ const Products = ({ productsData }) => {
                     <Left>
                         {["Network Cameras", "Software", "Network Switches", "Cables", "Security Doors", "Server and Storage"].map(val =>
                             <div className='flex items-center mb-5'>
-                                <FaBeer />
+                                <img className="mr-2" src="/images/pages/products/checkbox.svg" alt="img" />
                                 <p className='ml-3'>{val}</p>
                             </div>
                         )}
