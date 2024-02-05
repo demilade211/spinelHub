@@ -5,11 +5,36 @@ import Quicklinks from '../../components/Quicklinks';
 import RightSide from '../../components/pages/product/RightSide';
 import Tab from '@mui/material/Tab';
 import { StyledTab, StyledTabs } from "../../utils/CustomStyles"
-
+import { getOneProduct } from "../../services/product"
+import { useRouter } from "next/router"
 
 const OneProduct = () => {
 
+  const router = useRouter();
+
+  const { productId } = router.query; 
   const [value, setValue] = React.useState('one');
+  const [snackInfo, setSnackInfo] = React.useState({ openSnack: false, type: "", message: "" })
+  const [loading, setLoading] = React.useState(false)
+  const [product, setProduct] = React.useState({})
+
+  useEffect(() => {
+    
+    try {
+      const fetchProducts = async () => {
+        setLoading(true)
+        const response = await getOneProduct(productId)
+        setLoading(false)
+        setProduct(response.product)
+      };
+      fetchProducts();
+
+    } catch (error) {
+      setLoading(false)
+      alert(error)
+    }
+  }, []);
+  console.log(product);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -25,7 +50,7 @@ const OneProduct = () => {
           <Left>
             {[0, 0, 0, 0].map((val, index) => (<div className={`item ${index === 0 && "first-item"}`}></div>))}
           </Left>
-          <RightSide />
+          <RightSide product={product}/>
         </div>
         <StyledTabs
           value={value}

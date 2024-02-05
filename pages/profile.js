@@ -7,15 +7,17 @@ import ChangePass from "../components/pages/profile/ChangePass"
 import Adress from "../components/pages/profile/Adress"
 import ProductUpload from "../components/pages/profile/ProductUpload"
 import { BlueTab, BlueTabs } from "../utils/CustomStyles"
+import Stats from '../components/pages/profile/Stats';
 
 const profile = () => {
 
     const [value, setValue] = React.useState(1);
     const [htabs, setHtabs] = React.useState({
-        accInfo:false,
-        changePass:false,
-        address:false,
-        upload:false
+        accInfo: false,
+        changePass: false,
+        address: false,
+        stats:false,
+        upload: false
     });
 
     const handleChange = (event, newValue) => {
@@ -38,14 +40,16 @@ const profile = () => {
                     >
                         <BlueTab value={1} label="Account Information" />
                         <BlueTab value={2} label="Change password" />
-                        <BlueTab value={3} label="Address book enteries" />
-                        <BlueTab value={4} label="Product upload" />
+                        {/* <BlueTab value={3} label="Address book enteries" /> */}
+                        <BlueTab value={4} label="Stats" />
+                        <BlueTab value={5} label="Product upload" />
                     </BlueTabs>
                     <div className='tab-items mt-10'>
                         {value === 1 && <AccountInfo />}
                         {value === 2 && <ChangePass />}
                         {value === 3 && <Adress />}
-                        {value === 4 && <ProductUpload />}
+                        {value === 4 && <Stats />}
+                        {value === 5 && <ProductUpload />}
                     </div>
                 </div>
                 <div className='inner-mob'>
@@ -57,7 +61,7 @@ const profile = () => {
                                 :
                                 <img src="/images/pages/profile/down.svg" alt="img" />}</div>
                         </div>
-                        {htabs.accInfo && <AccountInfo/>}
+                        {htabs.accInfo && <AccountInfo />}
                     </AgreeDrop>
                     <AgreeDrop>
                         <div className={`cover `} onClick={() => { setHtabs((prev) => ({ ...prev, changePass: !prev.changePass })) }}>
@@ -67,7 +71,7 @@ const profile = () => {
                                 :
                                 <img src="/images/pages/profile/down.svg" alt="img" />}</div>
                         </div>
-                        {htabs.changePass && <ChangePass/>}
+                        {htabs.changePass && <ChangePass />}
                     </AgreeDrop>
                     <AgreeDrop>
                         <div className={`cover `} onClick={() => { setHtabs((prev) => ({ ...prev, address: !prev.address })) }}>
@@ -77,7 +81,17 @@ const profile = () => {
                                 :
                                 <img src="/images/pages/profile/down.svg" alt="img" />}</div>
                         </div>
-                        {htabs.address && <Adress/>}
+                        {htabs.address && <Adress />}
+                    </AgreeDrop>
+                    <AgreeDrop>
+                        <div className={`cover `} onClick={() => { setHtabs((prev) => ({ ...prev, stats: !prev.stats })) }}>
+                            <h2>Statistics</h2>
+                            <div>{htabs.stats ?
+                                <img src="/images/pages/profile/up.svg" alt="img" />
+                                :
+                                <img src="/images/pages/profile/down.svg" alt="img" />}</div>
+                        </div>
+                        {htabs.stats && <Stats />}
                     </AgreeDrop>
                     <AgreeDrop>
                         <div className={`cover `} onClick={() => { setHtabs((prev) => ({ ...prev, upload: !prev.upload })) }}>
@@ -87,7 +101,7 @@ const profile = () => {
                                 :
                                 <img src="/images/pages/profile/down.svg" alt="img" />}</div>
                         </div>
-                        {htabs.upload && <ProductUpload/>}
+                        {htabs.upload && <ProductUpload />}
                     </AgreeDrop>
                 </div>
             </Con>

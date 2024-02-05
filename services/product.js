@@ -1,5 +1,20 @@
 import axios from ".";
 
+export const uploadProduct = async (data) => {
+
+
+    try {
+        const res = await axios.post(`/api/v1/admin/product/create`,data)
+
+        const { success, message } = res.data
+        return res.data 
+
+    } catch (error) {
+        return error;
+
+    } 
+}
+
 export const getAllProduct = async () => { 
 
     try {

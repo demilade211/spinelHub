@@ -1,23 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components";
+import { UpdateQuantity, removeFromCart } from "../../../services/product"
+import { AddToCart, RemoveFromCart, AddToWish, RemoveFromWish } from "../../../redux/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const RightSide = () => {
+const RightSide = ({ product }) => { 
+
+    const { user, status } = useSelector((state) => state.userReducer);
+
+    let cart = user?.cartItems.filter(val => product._id === val.product._id)
+    console.log(cart[0]?.quantity);
+
+    const [quantity, setQuantity] = useState(cart[0]?.quantity)
+
+    const handleQuantity = async (type) => {
+        type === "reduce" ? setQuantity(quantity - 1) : setQuantity(quantity + 1)
+        await UpdateQuantity(cart[0].product._id, { action: type })
+
+    }
+
+    const handleCart = async (e) => {
+        dispatch(RemoveFromCart(cart[0].product._id))
+        await removeFromCart(cart[0].product._id)
+
+    }
+
     return (
         <Right>
-            <h1>Product name</h1>
-            <h2>&#8358;234,000</h2>
-            <p className='desc'>If there is a product description,
-                type it here. If there is a product description,
-                type it here.If there is a product description,
-                type it here.If there is a product description,
-                type it here.If there is a product description,
-                type it here.
+            <h1>{product.name}</h1>
+            <h2>&#8358;{product.price}</h2>
+            <p className='desc'>
+                {product.description}
             </p>
             <div className='flex md:items-center flex-col md:flex-row'>
                 <QuantityCon>
-                    <CountBtn>-</CountBtn>
-                    <p className='count'>2</p>
-                    <CountBtn>+</CountBtn>
+                    <CountBtn onClick={() => handleQuantity("reduce")} disabled={quantity < 2}>-</CountBtn>
+                    <p className='count'>{quantity}</p>
+                    <CountBtn onClick={() => handleQuantity("increase")}>+</CountBtn>
                 </QuantityCon>
                 <div className="cart-like con md:ml-10 ">
                     <BlueBtn>Add to cart</BlueBtn>
@@ -114,6 +133,10 @@ const CountBtn = styled.button`
     line-height: 150%; /* 24px */
     cursor:pointer;
     outline:none; 
+    button[disabled]{ 
+      background:  #ccd8ff;
+      color:white;
+    }
 `;
 
 const BlueBtn = styled.button`  
@@ -136,6 +159,10 @@ const BlueBtn = styled.button`
     line-height: 150%; /* 24px */
     cursor:pointer;
     outline:none; 
+    button[disabled]{ 
+      background:  #ccd8ff;
+      color:white;
+    }
 `;
 
 export default RightSide

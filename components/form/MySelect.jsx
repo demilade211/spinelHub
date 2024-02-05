@@ -5,14 +5,14 @@ import Select from 'react-select'
 
 
 
-const MySelect = ({label,options,onChange,value,place,big}) => {
+const MySelect = ({label,options,onChange,value,place,big,isDisabled}) => {
 
   const sel = big?selectStyle2:selectStyle
 
   return (
     <InputLabelCon>
         {big?<Label2>{label}</Label2>:<Label>{label}</Label>}
-        <Select options={options} styles={sel} value={value} onChange={onChange} placeholder={`${place || "Select an option"}`}/>
+        <Select options={options} isDisabled={isDisabled} styles={sel} value={value} onChange={onChange} placeholder={`${place || "Select an option"}`}/>
     </InputLabelCon>
   )
 }
